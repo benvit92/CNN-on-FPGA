@@ -1,0 +1,54 @@
+you do:
+
+go to
+cd /home/ettore/torch/extra/fpgatorch
+
+gcc -c -Wall -Werror -fPIC fpgatorch.c
+gcc -shared -o libfpgatorch.so fpgatorch.o
+
+
+luarocks make
+
+
+remember that the actual files are on /home/ettore/torch/extra/fpgatorch and need to be modified there
+
+
+
+
+for the other one:
+gcc -c -Wall -Werror -fPIC mycnn.c -std=c99
+gcc -shared -o libmycnn.so mycnn.o
+
+
+ local file = torch.DiskFile("input.bin","w"):binary()
+		fwrite(testing_dataset[604][1], file)
+		print(testing_dataset[604][1])
+		print(testing_dataset[604][2])
+		file:close()
+		
+		local ffi = require("ffi")
+		ffi.cdef([[
+		void forward(void);
+		]])
+		clib = ffi.load('mycnn')
+		clib.forward()
+		
+		local out = assert(io.open("output.txt", "rb"))
+		lines = {}
+		for line in out:lines() do
+			lines[#lines +1] = line
+		end
+		result= torch.Tensor(10)
+		for i=1,10 do
+			result[i] = tonumber(lines[i])
+		end
+		print(result)
+		local probabilites_per_class = torch.exp(result)
+        local probability, prediction = torch.max(probabilites_per_class, 1) 
+        if prediction[1] ~= testing_dataset[604][2] then
+			print(prediction[1])
+			print("WRONG!")
+		else
+			print("CORRECT!")
+		end
+		out:close()

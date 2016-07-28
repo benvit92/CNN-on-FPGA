@@ -1,0 +1,6 @@
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/mycnn.lua
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/init.lua
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/nn.lua
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/helloworld.lua
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/luann.lua
+/home/ettore/torch/install/lib/luarocks/rocks/fpgatorch/scm-1/lua/fpgatorch/usps_dataset.lua
